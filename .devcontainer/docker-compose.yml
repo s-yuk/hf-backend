@@ -38,4 +38,4 @@ services:
     volumes:
       - ../:/home/${USERNAME:-vscode}/workspace:cached
     ports:
-      - 8080:80
+      - 8000:80
