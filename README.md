@@ -33,10 +33,3 @@ vscodeのターミナルでバージョンが出ればOK
 $ java --version
 $ gradle -v
 ```
-
-### Spring Boot ビルド
-"/api/src/main/java/com/example/api/"のjavaファイル上で上の「Run Java」ボタンを押す
-
-http://localhost:8000/greeting
-
-でjsonが表示されれば成功
