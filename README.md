@@ -19,14 +19,13 @@ $ git version
 $ git clone https://github.com/s-yuk/hf-backend.git
 $ cd hf-backend
 $ code .
-#vscode起動
 ```
 
 3. vscodeで｢ctrl+shift+p｣を押し、openと入力→｢Dev Container: Reopen in Container｣を選択
 
-...ビルド中
+...ビルド中...
 
-...二回目から早くなる
+...二回目から早くなる...
 
 vscodeのターミナルでバージョンが出ればOK
 

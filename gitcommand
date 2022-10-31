@@ -1,0 +1,15 @@
+ターミナル上でやる
+
+ファイル編集後
+git add .
+
+addしたファイルをセーブ
+git commit -m "[コミットメッセージ]"
+例:git commit m "first commit"
+
+git push origin [ブランチ名]
+例:git push origin main
+
+pushした後コード書き始める時
+git pull origin [ブランチ名]
+例:git pull origin main

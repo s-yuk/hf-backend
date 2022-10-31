@@ -4,7 +4,14 @@
 - Spring Boot : 2.7.5
 - MySQL : 8.0.19
 - phpMyAdmin
-- Docker / DockerCompose / devcontaier
+- Docker / DockerCompose / vscode[devcontaier]
 
-## ディレクトリ構成
+## ディレクトリの役割
+- /controllers
+  - UpperCamelCase
+  - ルーティング
+  - RESTful
+- /models
+  - UpperCamelCase
+  - ビジネスロジック
 ## APIエンドポイント
