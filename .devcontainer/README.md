@@ -1,9 +1,5 @@
-- "docker/mysql/"
-  - "data/" MySQLのデータ永続用フォルダ
-  - "my.cnf" MySQL設定ファイル
-
-- "docker/workspace/Dockerfile"
-  - Dockerの設計図
-
-- "docker-compose.yml"
-  - コンテナの設計図
+## 使用技術
+- Java : 17.0.5
+- Gradle : 7.5
+- MySQL : 8.0.19
+- phpMyAdmin

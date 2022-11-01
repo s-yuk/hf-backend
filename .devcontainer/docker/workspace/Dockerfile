@@ -16,7 +16,7 @@ RUN apt-get update \
     && echo %${USER_GROUP_NAME} ALL=\(ALL\) NOPASSWD:ALL > /etc/sudoers.d/${USER_GROUP_NAME} \
     && chmod 0440 /etc/sudoers.d/${USER_GROUP_NAME}
 
-ARG JAVA_VERSION=18.0.2-amzn
+ARG JAVA_VERSION=17.0.5-amzn
 ARG GRADLE_VERSION=7.5
 
 RUN su ${USERNAME} --command \
