@@ -1,9 +1,10 @@
-## ディレクトリの役割
-- /controllers
-  - UpperCamelCase
-  - ルーティング
-  - RESTful
-- /models
-  - UpperCamelCase
+### ディレクトリの役割
+
+- controllers
+  - apiエンドポイント
+- services
   - ビジネスロジック
-## APIエンドポイント
+- models
+  - テーブル, データ構造
+- repositories
+  - dbアクセス
