@@ -42,7 +42,7 @@ public class AvListController {
     }
 
     @PostMapping(path = "")
-    public ResponseEntity<AvList> createTodoItem(@RequestBody AvList newAvList) {
+    public ResponseEntity<AvList> createAvList(@RequestBody AvList newAvList) {
         AvList savedAvList = _avListService.saveAvList(newAvList);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(savedAvList.getId()).toUri();
