@@ -15,16 +15,22 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "avlist")
-public class AvList {
+@Table(name = "history")
+public class History {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
-  private int id;
+  @Column(name = "history_id", nullable = false)
+  private int history_id;
 
-  @Column(name = "av_title", nullable = false)
-  private String av_title;
+  @Column(name = "user_id", nullable = false)
+  private String user_id;
 
-  @Column(name = "av_url", nullable = false)
-  private String av_url;
+  @Column(name = "product_id", nullable = true)
+  private String product_id;
+
+  @Column(name = "history_date", nullable = false)
+  private String history_date;
+
+  @Column(name = "history_num", nullable = false)
+  private String history_num;
 }

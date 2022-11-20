@@ -15,16 +15,23 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "avlist")
-public class AvList {
+@Table(name = "products")
+public class Product {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private int id;
 
-  @Column(name = "av_title", nullable = false)
-  private String av_title;
+  @Column(name = "product_point", nullable = false)
+  private String product_point;
 
-  @Column(name = "av_url", nullable = false)
-  private String av_url;
+  @Column(name = "product_image_path", nullable = true)
+  private String product_image_path;
+
+  @Column(name = "product_name", nullable = false)
+  private String product_name;
+
+  @Column(name = "product_type_id", nullable = false)
+  private String product_type_id;
+
 }
