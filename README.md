@@ -3,5 +3,6 @@
 ```sh
 $ git clone https://github.com/s-yuk/hf-backend.git
 ```
-vscode上で[Dev Container: Reopen in Container]
-Spring Bootのbuild
+
+1. vscode上で[Dev Container: Reopen in Container]
+2. Spring Bootのbuild
