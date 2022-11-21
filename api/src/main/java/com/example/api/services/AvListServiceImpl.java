@@ -22,7 +22,6 @@ public class AvListServiceImpl implements AvListService {
   @Override
   public Optional<AvList> getAvListById(int id) {
     return _avListRepository.findById(id);
-    // _findAvListById(id);
   };
   @Override
   public AvList saveAvList(AvList avList) {
