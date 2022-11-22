@@ -1,5 +1,7 @@
 package com.example.api.models;
 
+import java.time.Instant;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,4 +42,10 @@ public class User {
 
   @Column(name = "user_image_path", nullable = false)
   private String user_image_path;
+
+  @Column(name = "refreshtoken", length = 64)
+  private String refreshToken;
+
+  @Column(name = "refreshtoken_iat")
+  private Instant refreshTokenIssuedAt;
 }
