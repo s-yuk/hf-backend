@@ -3,6 +3,7 @@ package com.example.api.config;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.example.api.UserForm;
+import com.example.api.models.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -34,7 +35,7 @@ public class JsonAuthenticationFilter extends UsernamePasswordAuthenticationFilt
       this.setAuthenticationSuccessHandler((req,res,ex) -> {
           String token = JWT.create()
                   .withIssuer("com.volkruss.toaru")
-                  .withClaim("username", ex.getName())
+                  .withClaim("user_name", ex.getName())
                   .sign(Algorithm.HMAC256("secret"));
           res.setHeader("X-AUTH-TOKEN", token);
           res.setStatus(200);
@@ -49,9 +50,9 @@ public class JsonAuthenticationFilter extends UsernamePasswordAuthenticationFilt
   public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
       try {
           ServletInputStream stream = request.getInputStream();
-          UserForm form = new ObjectMapper().readValue(request.getInputStream(), UserForm.class);
+          User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
           return this.authenticationManager.authenticate(
-                  new UsernamePasswordAuthenticationToken(form.getUsername(), form.getPassword(), new ArrayList<>())
+                  new UsernamePasswordAuthenticationToken(user.getUser_name(), user.getPassword(), new ArrayList<>())
           );
       } catch (IOException e) {
           throw new RuntimeException(e);
