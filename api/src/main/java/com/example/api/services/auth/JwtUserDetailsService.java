@@ -3,7 +3,7 @@ package com.example.api.services.auth;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.example.api.dto.UserIssueToken;
-import com.example.api.repositories.UserRepository;
+import com.example.api.repositories.auth.UserRepository;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -51,7 +51,7 @@ public class JwtUserDetailsService implements UserDetailsService {
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        final com.example.api.models.User user = findByUsername(username);
+        final com.example.api.models.auth.User user = findByUsername(username);
         return User.withUsername(user.getUserId())
                         .password(user.getPassword())
                         .authorities(Collections.emptyList())
@@ -76,7 +76,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Transactional(readOnly = true)
     public boolean verifyRefreshToken(String username, String refreshToken) throws UsernameNotFoundException {
-        final com.example.api.models.User user = findByUsername(username);
+        final com.example.api.models.auth.User user = findByUsername(username);
 
         if(user.getRefreshTokenIssuedAt() != null &&
                 user.getRefreshTokenIssuedAt().plus(refreshTokenExpTime, ChronoUnit.SECONDS).isBefore(Instant.now())) {
@@ -88,7 +88,7 @@ public class JwtUserDetailsService implements UserDetailsService {
     }
 
     private String generateRefreshToken(String username) throws UsernameNotFoundException {
-        final com.example.api.models.User user = findByUsername(username);
+        final com.example.api.models.auth.User user = findByUsername(username);
         final String token = RandomStringUtils.randomAlphanumeric(REFRESH_TOKEN_LENGTH);
         user.setRefreshToken(passwordEncoder.encode(token));
         user.setRefreshTokenIssuedAt(Instant.now());
@@ -96,7 +96,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         return token;
     }
 
-    private com.example.api.models.User findByUsername(String username) throws UsernameNotFoundException {
+    private com.example.api.models.auth.User findByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUserId(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found:[" + username + "]"));
     }
