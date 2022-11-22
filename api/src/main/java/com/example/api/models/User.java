@@ -4,44 +4,39 @@ import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "users")
+@Table(name = "user")
 public class User {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "user_id", nullable = false)
-  private int user_id;
+  @Column(name = "userid", length = 32, nullable = false)
+  private String userId;
 
-  @Column(name = "email", nullable = false)
-  private String email;
+  // @Column(name = "email", nullable = false)
+  // private String email;
 
-  @Column(name = "password", nullable = false)
+  @Column(name = "password", length = 64, nullable = false)
   private String password;
 
-  @Column(name = "user_name", nullable = false)
-  private String user_name;
+  // @Column(name = "user_point", columnDefinition="varchar(255) default '0'", nullable = false)
+  // private String user_point;
 
-  @Column(name = "user_point", columnDefinition="varchar(255) default '0'", nullable = false)
-  private String user_point;
+  // @Column(name = "group_id", nullable = false)
+  // private String group_id;
 
-  @Column(name = "group_id", nullable = false)
-  private String group_id;
-
-  @Column(name = "user_image_path", nullable = false)
-  private String user_image_path;
+  // @Column(name = "user_image_path", nullable = false)
+  // private String user_image_path;
 
   @Column(name = "refreshtoken", length = 64)
   private String refreshToken;

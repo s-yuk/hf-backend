@@ -14,3 +14,11 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+jwt:
+  accesstoken:
+    secretkey: SECRET_KEY
+    expirationtime: 30
+  refreshtoken:
+    expirationtime: 60
+
