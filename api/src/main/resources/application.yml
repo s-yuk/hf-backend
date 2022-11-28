@@ -1,14 +1,18 @@
+server:
+  address: 172.18.0.4
+  port: 8080
 spring:
   jpa:
     database: MYSQL
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
       show-sql: true
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
         hbm2dll:
           create_namespaces: true
-
   datasource:
     url: jdbc:mysql://db:3306/db
     username: root
