@@ -3,7 +3,7 @@ package com.example.api.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.api.models.AvList;
+import com.example.api.model.AvList;
 
 public interface AvListService {
   public List<AvList> getAvLists();

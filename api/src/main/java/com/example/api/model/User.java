@@ -1,4 +1,4 @@
-package com.example.api.models.auth;
+package com.example.api.model;
 
 import java.time.Instant;
 
@@ -17,7 +17,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user")
+@Table(name = "users")
 public class User {
   @Id
   @Column(name = "userid", length = 32, nullable = false)

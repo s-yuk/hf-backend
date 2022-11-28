@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.api.models.AvList;
+import com.example.api.model.AvList;
 import com.example.api.services.AvListService;
 
 
