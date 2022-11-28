@@ -1,4 +1,4 @@
-package com.example.api.controllers;
+package com.example.api.controller;
 
 
 import java.net.URI;
