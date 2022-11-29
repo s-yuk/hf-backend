@@ -9,8 +9,9 @@ POST http://localhost:8080/api/v1/avlist
 Content-Type: application/json
 
 {
-  "av_title": "アオハル。 涼森れむbbb",
-  "av_url": "https://book.dmm.co.jp/detail/k740aplst04030/?i3_ref=search&i3_ord=1"
+  "product_name": "商品1",
+  "product_point": "100",
+  "product_image_id": "1"
 }
 
 ###
@@ -20,8 +21,9 @@ Content-Type: application/json
 
 {
   "id": "4",
-  "av_title": "潮 涼森れむ",
-  "av_url": "https://book.dmm.co.jp/detail/k740aplst01357/?i3_ref=search&i3_ord=2"
+  "product_name": "商品4",
+  "product_point": "200",
+  "product_image_id": "6"
 }
 
 ###

@@ -19,12 +19,16 @@ import lombok.NoArgsConstructor;
 public class AvList {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
-  private int id;
+  @Column(name = "product_id", nullable = false)
+  private int product_id;
 
-  @Column(name = "av_title", nullable = false)
-  private String av_title;
+  @Column(name = "product_name", nullable = false)
+  private String product_name;
 
-  @Column(name = "av_url", nullable = false)
-  private String av_url;
+  @Column(name = "product_point", nullable = false)
+  private String product_point;
+
+  @Column(name = "product_image_id", nullable = false)
+  private String product_image_id;
+
 }
