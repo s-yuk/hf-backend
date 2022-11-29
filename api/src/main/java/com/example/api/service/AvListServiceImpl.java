@@ -1,4 +1,4 @@
-package com.example.api.services;
+package com.example.api.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.api.models.AvList;
-import com.example.api.repositories.AvListRepository;
+import com.example.api.model.AvList;
+import com.example.api.repo.AvListRepository;
 
 @Service
 public class AvListServiceImpl implements AvListService {

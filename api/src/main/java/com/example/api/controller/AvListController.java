@@ -1,4 +1,4 @@
-package com.example.api.controllers;
+package com.example.api.controller;
 
 
 import java.net.URI;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.api.models.AvList;
-import com.example.api.services.AvListService;
+import com.example.api.model.AvList;
+import com.example.api.service.AvListService;
 
 
 @RequestMapping(path = AvListController.BASE_URL)

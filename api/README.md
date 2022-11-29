@@ -3,8 +3,10 @@
 - controllers
   - apiエンドポイント
 - services
+  - サービスレイヤー
   - ビジネスロジック
 - repositories
-  - interface作れば動く
+  - データアクセスレイヤー
+  - interfaceを作る
 - models
-  - テーブル, データ構造
+  - データ構造
