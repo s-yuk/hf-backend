@@ -8,7 +8,6 @@
   "extensions": [
     "vscjava.vscode-java-pack",
     "vscjava.vscode-spring-initializr",
-    "vscjava.vscode-gradle",
-    "humao.rest-client"
+    "vscjava.vscode-gradle"
   ]
 }

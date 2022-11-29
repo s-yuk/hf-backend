@@ -21,10 +21,10 @@ public class ApiApplication {
 		SpringApplication.run(ApiApplication.class, args);
 	}
 
-	// @Bean
-	// PasswordEncoder passwordEncoder() {
-	// 	return new BCryptPasswordEncoder();
-	// }
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 	@Bean
 	CommandLineRunner run(UserService userService) {
