@@ -10,8 +10,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.example.api.filter.CustomAuthenticationFilter;
+import com.example.api.filter.CustomAuthorizationFilter;
 
 import lombok.RequiredArgsConstructor;
 
@@ -40,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.authorizeRequests().antMatchers(POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
     http.authorizeRequests().anyRequest().authenticated();
     http.addFilter(customAuthenticationFilter);
+    http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
   }
 
   @Bean
