@@ -1,15 +1,23 @@
 package com.example.api.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.example.api.model.auth.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import static javax.persistence.FetchType.*;
 
 @Entity
 @Data
@@ -34,4 +42,9 @@ public class Product {
   @Column(name = "product_type_id", nullable = false)
   private String product_type_id;
 
+
+  @ManyToMany(fetch = EAGER)
+  private Collection<User> users = new ArrayList<>();
+
 }
+
