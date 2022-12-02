@@ -1,0 +1,9 @@
+POST http://172.18.0.4:8080/api/login HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+username=john&password=1234
+
+###
+
+GET http://172.18.0.4:8080/api/users HTTP/1.1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huIiwicm9sZXMiOlsiUk9MRV9NQU5BR0VSIiwiUk9MRV9VU0VSIl0sImlzcyI6Imh0dHA6Ly8xNzIuMTguMC40OjgwODAvYXBpL2xvZ2luIiwiZXhwIjoxNjY5OTQ2OTU2fQ.nVMwSFWX45HumZnynOWKaJWFlUXPtJaXH-aT44FJNSM
