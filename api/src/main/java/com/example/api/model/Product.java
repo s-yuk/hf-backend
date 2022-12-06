@@ -2,6 +2,7 @@ package com.example.api.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.example.api.model.auth.User;
@@ -23,11 +25,10 @@ import static javax.persistence.FetchType.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "products")
 public class Product {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
+  @Column(nullable = false)
   private int id;
 
   @Column(name = "product_point", nullable = false)
@@ -46,5 +47,7 @@ public class Product {
   @ManyToMany(fetch = EAGER)
   private Collection<User> users = new ArrayList<>();
 
+  // @OneToMany(mappedBy = "product")
+  // private Collection<History> history;
 }
 
