@@ -1,8 +1,22 @@
-### 環境構築
+## 📄API仕様書
+---
+BASE_URL=http://localhost:8080/api
 
-```sh
-$ git clone https://github.com/s-yuk/hf-backend.git
+### ログイン
+レスポンスのボディにaccess_tokenとrefresh_tokenが返ってくる
+```
+POST /login HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+{
+  "username": "john",
+  "password": "1234"
+}
 ```
 
-1. vscode上で[Dev Container: Reopen in Container]
-2. Spring Bootのbuild
+### リフレッシュトークン発行
+レスポンスのボディにaccess_tokenとrefresh_tokenが返ってくる
+```
+GET /token/refresh HTTP/1.1
+Authorization: Bearer {refresh_token}
+```
