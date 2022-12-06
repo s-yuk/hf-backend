@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,9 +23,11 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.api.model.auth.Role;
 import com.example.api.model.auth.User;
 import com.example.api.service.auth.UserService;
+import com.example.api.service.auth.Impl.UserServiceImpl;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import static org.springframework.http.HttpHeaders.*;
 import java.util.Date;
@@ -41,8 +44,16 @@ import static org.springframework.http.MediaType.*;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@Slf4j
 public class UserResource {
   private final UserService userService;
+
+
+  @GetMapping("/auth")
+  public String debug(@AuthenticationPrincipal UserService userService) {
+    log.info("debug: {}", userService);
+    return "user";
+  }
 
   @GetMapping("/users")
   public ResponseEntity<List<User>>getUsers() {
