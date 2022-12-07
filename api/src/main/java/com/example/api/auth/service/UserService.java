@@ -1,10 +1,5 @@
 package com.example.api.auth.service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.security.core.Authentication;
-
 import com.example.api.auth.model.Role;
 import com.example.api.auth.model.User;
 

@@ -10,7 +10,7 @@ Content-Type: application/x-www-form-urlencoded
 
 {
   "username": "alice",
-  "password": "1234",
+  "password": "12345",
   "email": "aaa@gmail.com",
   "have_points": "100",
   "roles": [
@@ -28,8 +28,8 @@ POST /login HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 
 {
-  "username": "john",
-  "password": "1234"
+  "email": "aaa@gmail.com",
+  "password": "12345"
 }
 ```
 
