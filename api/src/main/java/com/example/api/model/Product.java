@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+// import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.example.api.model.auth.User;
@@ -43,8 +44,11 @@ public class Product {
   private String product_type_id;
 
 
-  @ManyToMany(fetch = EAGER)
-  private Collection<User> users = new ArrayList<>();
+  // @ManyToMany(fetch = EAGER)
+  // private Collection<User> users = new ArrayList<>();
+
+  // @OneToMany(fetch = EAGER)
+  // private Collection<History> history = new ArrayList<>();
 
 }
 
