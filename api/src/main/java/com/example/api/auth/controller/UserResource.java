@@ -1,4 +1,4 @@
-package com.example.api.controller.auth;
+package com.example.api.auth.controller;
 
 import java.io.IOException;
 import java.net.URI;
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +21,9 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.api.model.auth.Role;
-import com.example.api.model.auth.User;
-import com.example.api.service.auth.UserService;
-import com.example.api.service.auth.Impl.UserServiceImpl;
+import com.example.api.auth.model.Role;
+import com.example.api.auth.model.User;
+import com.example.api.auth.service.UserService;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +34,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -50,21 +49,21 @@ public class UserResource {
 
 
   @GetMapping("/auth")
-  public String debug(@AuthenticationPrincipal UserService userService) {
-    log.info("debug: {}", userService);
+  public String test(@AuthenticationPrincipal UserDetails userDetails) {
+    log.info("test {}", userDetails.getUsername());
     return "user";
   }
 
-  @GetMapping("/users")
-  public ResponseEntity<List<User>>getUsers() {
-    return ResponseEntity.ok().body(userService.getUsers());
-  }
+  // @GetMapping("/users")
+  // public ResponseEntity<List<User>>getUsers() {
+  //   return ResponseEntity.ok().body(userService.getUsers());
+  // }
 
-  @PostMapping("/user/save")
-  public ResponseEntity<User>saveUser(@RequestBody User user) {
-    URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
-    return ResponseEntity.created(uri).body(userService.saveUser(user));
-  }
+  // @PostMapping("/user/save")
+  // public ResponseEntity<User>saveUser(@RequestBody User user) {
+  //   URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
+  //   return ResponseEntity.created(uri).body(userService.saveUser(user));
+  // }
 
   @PostMapping("/role/save")
   public ResponseEntity<Role>saveRole(@RequestBody Role role) {
@@ -72,11 +71,11 @@ public class UserResource {
     return ResponseEntity.created(uri).body(userService.saveRole(role));
   }
 
-  @PostMapping("/role/addtouser")
-  public ResponseEntity<?>addRoleToUser(@RequestBody RoleToUserForm form) {
-    userService.addRoleToUser(form.getUsername(), form.getRoleName());
-    return ResponseEntity.ok().build();
-  }
+  // @PostMapping("/role/addtouser")
+  // public ResponseEntity<?>addRoleToUser(@RequestBody RoleToUserForm form) {
+  //   userService.addRoleToUser(form.getUsername(), form.getRoleName());
+  //   return ResponseEntity.ok().build();
+  // }
 
   @GetMapping("/token/refresh")
   public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
