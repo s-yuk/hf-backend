@@ -21,14 +21,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
   private final UserRepo userRepo;
   private final RoleRepo roleRepo;
   private final PasswordEncoder passwordEncoder;
-  // private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
+  private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
 
   @Override
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    // if (userRepo.findByEmail(email).isEmpty()) {
-    //   throw new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email));
-    // }
-    return null;
+    return (UserDetails) userRepo.findByEmail(email).orElseThrow(() ->
+      new UsernameNotFoundException(
+        String.format(USER_NOT_FOUND_MSG, email)));
   }
 
   @Override
@@ -44,5 +43,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
     user.setPassword(passwordEncoder.encode(user.getPassword()));
     userRepo.save(user);
+  }
+
+  @Override
+  public User getUser(String username) {
+    log.info("fetching user {}", username);
+    return userRepo.findByUsername(username);
   }
 }

@@ -2,7 +2,6 @@ package com.example.api.auth.controller;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
