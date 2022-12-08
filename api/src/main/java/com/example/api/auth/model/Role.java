@@ -1,4 +1,4 @@
-package com.example.api.model;
+package com.example.api.auth.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,18 +13,14 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "avlist")
-public class AvList {
+@AllArgsConstructor
+@Table(name = "role")
+public class Role {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
-  private int id;
-
-  @Column(name = "av_title", nullable = false)
-  private String av_title;
-
-  @Column(name = "av_url", nullable = false)
-  private String av_url;
+  @Column(name = "role_id")
+  private Long id;
+  @Column(name = "name")
+  private String name;
 }

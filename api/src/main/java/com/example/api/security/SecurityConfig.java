@@ -25,7 +25,9 @@ import static org.springframework.security.config.http.SessionCreationPolicy.*;
 
 import java.util.Arrays;
 
-@Configuration @EnableWebSecurity @RequiredArgsConstructor
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
   private final UserDetailsService userDetailsService;
   private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -42,25 +44,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.csrf().disable();
     http.sessionManagement().sessionCreationPolicy(STATELESS);
     http
-      .authorizeRequests()
-        .antMatchers("/api/login/**", "/api/token/refresh/**").permitAll()
-        .antMatchers(GET, "/api/user/**").hasAnyAuthority("ROLE_USER")
-        .antMatchers(POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
+        .authorizeRequests()
+        .antMatchers("/api/login/**", "/api/token/refresh/**", "/api/register/**").permitAll();
+    // .antMatchers(GET, "/api/user/**").hasAnyAuthority("ROLE_USER")
+    // .antMatchers(POST, "/api/user/save/**").hasAnyAuthority("ROLE_ADMIN");
     http.authorizeRequests().anyRequest().authenticated();
     http.addFilter(customAuthenticationFilter);
-    http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+    http.addFilterBefore(new CustomAuthorizationFilter(),
+        UsernamePasswordAuthenticationFilter.class);
     http.cors(Customizer.withDefaults());
   }
 
   @Bean
-	CorsConfigurationSource corsConfigurationSource() {
-		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
-		configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE"));
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", configuration);
-		return source;
-	}
+  CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT",
+        "DELETE"));
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
+  }
 
   @Bean
   @Override
