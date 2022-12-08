@@ -79,15 +79,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   public AuthenticationManager authenticationManagerBean() throws Exception {
     return super.authenticationManagerBean();
   }
-
-  // @Bean
-  // public UserDetailsService userDetailsService() {
-  //   return (UserDetailsService) email -> {
-  //     Optional<User> user = userService.findUserByEmail(email);
-  //     if(user.isEmpty()) {
-  //       throw new UsernameNotFoundException("no user found with email: " + email);
-  //     }
-  //     return user.get();
-  //   };
-  // }
 }

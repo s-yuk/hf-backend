@@ -24,11 +24,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
   private final RoleRepo roleRepo;
   private final PasswordEncoder passwordEncoder;
 
-  @Transactional
-  public Optional<User> findUserByEmail(String email) {
-    return userRepo.findUserByEmail(email);
-  }
-
   @Override
   public Role saveRole(Role role) {
     log.info("saving new role {} to the database", role.getName());
@@ -45,23 +40,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
   }
 
   @Override
-  public User getUser(String username) {
-    log.info("fetching user {}", username);
-    return userRepo.findByUsername(username);
-  }
-
-  @Override
   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    // return (User) email -> {
-    //   Optional<User> user = userService.findUserByEmail(email);
-    //   if(user.isEmpty()) {
-    //     throw new UsernameNotFoundException("no user found with email: " + email);
-    //   }
-    //   return user.get();
-    // };
-    Optional<User> user = UserService.findUserByEmail(email);
+    Optional<User> user = userRepo.findUserByEmail(email);
+    log.info("{}", user.get());
     if(user.isEmpty()) {
-
+      throw new UsernameNotFoundException("no user found with email: " + email);
     }
+    return user.get();
   }
 }
