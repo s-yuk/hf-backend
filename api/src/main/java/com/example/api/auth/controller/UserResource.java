@@ -38,11 +38,6 @@ public class UserResource {
   private final UserRepo userRepo;
 
   @PostMapping("/role/save")
-  // public ResponseEntity<Role>saveRole(@RequestBody Role role) {
-  // URI uri =
-  // URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
-  // return ResponseEntity.created(uri).body(userService.saveRole(role));
-  // }
   public void saveRole(Role role) {
     userService.saveRole(role);
   }
