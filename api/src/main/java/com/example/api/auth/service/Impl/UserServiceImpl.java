@@ -1,5 +1,7 @@
 package com.example.api.auth.service.Impl;
 
+import java.util.Optional;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,13 +23,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
   private final UserRepo userRepo;
   private final RoleRepo roleRepo;
   private final PasswordEncoder passwordEncoder;
-  private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
 
-  @Override
-  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    return (UserDetails) userRepo.findByEmail(email).orElseThrow(() ->
-      new UsernameNotFoundException(
-        String.format(USER_NOT_FOUND_MSG, email)));
+  @Transactional
+  public Optional<User> findUserByEmail(String email) {
+    return userRepo.findUserByEmail(email);
   }
 
   @Override
@@ -37,7 +36,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
   }
 
   public void signUpUser(User user) {
-    boolean userExists = userRepo.findByEmail(user.getEmail()).isPresent();
+    boolean userExists = userRepo.findUserByEmail(user.getEmail()).isPresent();
     if (userExists) {
       throw new IllegalStateException("email already taken");
     }
@@ -49,5 +48,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
   public User getUser(String username) {
     log.info("fetching user {}", username);
     return userRepo.findByUsername(username);
+  }
+
+  @Override
+  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    // return (User) email -> {
+    //   Optional<User> user = userService.findUserByEmail(email);
+    //   if(user.isEmpty()) {
+    //     throw new UsernameNotFoundException("no user found with email: " + email);
+    //   }
+    //   return user.get();
+    // };
+    Optional<User> user = UserService.findUserByEmail(email);
+    if(user.isEmpty()) {
+
+    }
   }
 }

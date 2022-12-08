@@ -15,7 +15,8 @@ Content-Type: application/x-www-form-urlencoded
   "have_points": "100",
   "roles": [
       {
-        "id": 1
+        "id": 1,
+        "name": "ROLE_UESR"
       }
   ]
 }

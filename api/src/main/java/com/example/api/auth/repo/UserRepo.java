@@ -12,5 +12,5 @@ import com.example.api.auth.model.User;
 @Transactional
 public interface UserRepo extends JpaRepository<User, Long> {
   User findByUsername(String username);
-  Optional<User> findByEmail(String email);
+  Optional<User> findUserByEmail(String email);
 }
