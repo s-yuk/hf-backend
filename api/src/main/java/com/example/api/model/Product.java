@@ -1,23 +1,19 @@
 package com.example.api.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.example.api.model.auth.User;
+import com.example.api.auth.model.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import static javax.persistence.FetchType.*;
 
 @Entity
 @Data
@@ -27,24 +23,12 @@ import static javax.persistence.FetchType.*;
 public class Product {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id", nullable = false)
-  private int id;
-
-  @Column(name = "product_point", nullable = false)
-  private String product_point;
-
-  @Column(name = "product_image_path", nullable = true)
-  private String product_image_path;
-
-  @Column(name = "product_name", nullable = false)
+  @Column(name = "product_id")
+  private Long id;
+  @Column(name = "product_name")
   private String product_name;
-
-  @Column(name = "product_type_id", nullable = false)
-  private String product_type_id;
-
-
-  @ManyToMany(fetch = EAGER)
-  private Collection<User> users = new ArrayList<>();
-
+  @Column(name = "necessary_points")
+  private String necessary_points;
+  @ManyToOne(fetch = FetchType.EAGER)
+  private User user;
 }
-
