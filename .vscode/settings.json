@@ -2,6 +2,5 @@
   "editor.tabSize": 2,
   "files.trimTrailingWhitespace": true,
   "files.eol": "\n",
-  "editor.formatOnSave": true,
-  "java.compile.nullAnalysis.mode": "disabled"
+  "editor.formatOnSave": true
 }
