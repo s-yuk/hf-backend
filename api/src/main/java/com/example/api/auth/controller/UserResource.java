@@ -3,14 +3,19 @@ package com.example.api.auth.controller;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +30,7 @@ import com.example.api.auth.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import static org.springframework.http.HttpHeaders.*;
 import static org.springframework.http.HttpStatus.*;
@@ -33,6 +39,7 @@ import static org.springframework.http.MediaType.*;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@Slf4j
 public class UserResource {
   private final UserService userService;
   private final UserRepo userRepo;
@@ -41,6 +48,26 @@ public class UserResource {
   public void saveRole(Role role) {
     userService.saveRole(role);
   }
+
+  @GetMapping("/users")
+  public ResponseEntity<List<User>> getUsers() {
+    List<User> users = userService.getUsers();
+    return ResponseEntity.ok(users);
+  }
+
+  @PostMapping("/user/save")
+  public ResponseEntity<?> saveUser(@RequestBody User user) {
+    log.info("get user: {}", user);
+    userService.saveUser(user);
+    return ResponseEntity.ok().build();
+  }
+
+  // @PutMapping("user/{id}/point")
+  // public ResponseEntity<?> updateUserPoint(@PathVariable Long id, @RequestBody
+  // User newUserPoint) {
+  // userService.updateUserPointById(id, newUserPoint);
+  // return ResponseEntity.ok().build();
+  // }
 
   @GetMapping("/token/refresh")
   public void refreshToken(User user, HttpServletRequest request, HttpServletResponse response) throws IOException {

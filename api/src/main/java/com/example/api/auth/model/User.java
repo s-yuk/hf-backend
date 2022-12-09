@@ -37,22 +37,17 @@ public class User implements UserDetails {
   private String username;
   @Column(name = "password")
   private String password;
-  @Column(name = "have_points", columnDefinition = "varchar(255) default '0'")
-  private String have_points;
+  @Column(name = "have_points", columnDefinition = "int default '0'")
+  private Integer have_points;
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Collection<Role> roles = new ArrayList<>();
 
   /**
-   * UserDetailsを実装するために必要な関数で実際は使わない
-   * getUsernameでemailを返す
+   * UserDetailsを実装するために必要な関数
+   * 触らなくていい
    */
-  @Override
-  public String getUsername() {
-    return email;
-  };
-
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return null;
@@ -60,21 +55,21 @@ public class User implements UserDetails {
 
   @Override
   public boolean isAccountNonExpired() {
-    return false;
+    return true;
   }
 
   @Override
   public boolean isAccountNonLocked() {
-    return false;
+    return true;
   }
 
   @Override
   public boolean isCredentialsNonExpired() {
-    return false;
+    return true;
   }
 
   @Override
   public boolean isEnabled() {
-    return false;
+    return true;
   }
 }

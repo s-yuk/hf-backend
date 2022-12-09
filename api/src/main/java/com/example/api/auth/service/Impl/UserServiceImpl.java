@@ -2,6 +2,7 @@ package com.example.api.auth.service.Impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -36,6 +37,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     return roleRepo.save(role);
   }
 
+  @Override
+  public List<User> getUsers() {
+    return userRepo.findAll();
+  }
+
+  @Override
+  public User saveUser(User user) {
+    log.info("saving new user {} to the database", user);
+    return userRepo.save(user);
+  };
+
+  @Override
+  public void updateUserPointById(Long id, User user) {
+
+  };
+
   public void signUpUser(User user) {
     boolean userExists = userRepo.findByEmail(user.getEmail()).isPresent();
     if (userExists) {
@@ -46,18 +63,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
   }
 
   @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User user = userRepo.findByUsername(username);
+  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    User user = userRepo.findUserByEmail(email);
     if (user == null) {
-      log.error("user not found in database: {}", username);
-      throw new UsernameNotFoundException("user not found in database");
+      log.error("email not found in database: {}", email);
+      throw new UsernameNotFoundException("email not found in database");
     } else {
-      log.info("user found in database: {}", username);
+      log.info("user found in database: {}", email);
     }
     Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
     user.getRoles().forEach(role -> {
       authorities.add(new SimpleGrantedAuthority(role.getName()));
     });
-    return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+    return user;
   }
 }
