@@ -16,7 +16,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.example.api.auth.service.Impl.UserServiceImpl;
+import com.example.api.auth.service.Impl.AuthServiceImpl;
 import com.example.api.filter.CustomAuthenticationFilter;
 import com.example.api.filter.CustomAuthorizationFilter;
 
@@ -29,12 +29,12 @@ import static org.springframework.http.HttpMethod.*;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-  private final UserServiceImpl userServiceImpl;
+  private final AuthServiceImpl authServiceImpl;
   private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(userServiceImpl).passwordEncoder(bCryptPasswordEncoder);
+    auth.userDetailsService(authServiceImpl).passwordEncoder(bCryptPasswordEncoder);
   }
 
   @Override

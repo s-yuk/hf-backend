@@ -1,4 +1,4 @@
-package com.example.api.auth.model;
+package com.example.api.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

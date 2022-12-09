@@ -2,22 +2,19 @@ package com.example.api.auth.service.Impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.api.auth.model.Role;
-import com.example.api.auth.model.User;
-import com.example.api.auth.repo.RoleRepo;
-import com.example.api.auth.repo.UserRepo;
-import com.example.api.auth.service.UserService;
+import com.example.api.auth.service.AuthService;
+import com.example.api.model.User;
+import com.example.api.repo.UserRepo;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,45 +23,24 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class UserServiceImpl implements UserService, UserDetailsService {
-  private final UserRepo userRepo;
-  private final RoleRepo roleRepo;
+public class AuthServiceImpl implements AuthService, UserDetailsService {
   private final PasswordEncoder passwordEncoder;
-
-  @Override
-  public Role saveRole(Role role) {
-    log.info("saving new role {} to the database", role.getName());
-    return roleRepo.save(role);
-  }
-
-  @Override
-  public List<User> getUsers() {
-    return userRepo.findAll();
-  }
-
-  @Override
-  public User saveUser(User user) {
-    log.info("saving new user {} to the database", user);
-    return userRepo.save(user);
-  };
-
-  @Override
-  public void updateUserPointById(Long id, User user) {
-
-  };
+  @Autowired
+  private UserRepo _userRepo;
 
   public void signUpUser(User user) {
-    boolean userExists = userRepo.findByEmail(user.getEmail()).isPresent();
+
+    boolean userExists = _userRepo.findByEmail(user.getEmail()).isPresent();
     if (userExists) {
       throw new IllegalStateException("The email address you entered is already in use");
     }
     user.setPassword(passwordEncoder.encode(user.getPassword()));
-    userRepo.save(user);
+    _userRepo.save(user);
   }
 
   @Override
-  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    User user = userRepo.findUserByEmail(email);
+  public User loadUserByUsername(String email) throws UsernameNotFoundException {
+    User user = _userRepo.findUserByEmail(email);
     if (user == null) {
       log.error("email not found in database: {}", email);
       throw new UsernameNotFoundException("email not found in database");
