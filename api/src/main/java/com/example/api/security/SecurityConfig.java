@@ -1,11 +1,8 @@
 package com.example.api.security;
 
-import java.util.Arrays;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -23,6 +20,10 @@ import com.example.api.filter.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.*;
+
+import java.util.Arrays;
+import java.util.List;
+
 import static org.springframework.http.HttpMethod.*;
 
 @Configuration
@@ -52,23 +53,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.addFilter(customAuthenticationFilter);
     http.addFilterBefore(new CustomAuthorizationFilter(),
         UsernamePasswordAuthenticationFilter.class);
-    http.cors(Customizer.withDefaults());
-  }
-
-  @Bean
-  CorsConfigurationSource corsConfigurationSource() {
-    CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
-    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT",
-        "DELETE"));
-    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", configuration);
-    return source;
+    http.cors();
   }
 
   @Bean
   @Override
   public AuthenticationManager authenticationManagerBean() throws Exception {
     return super.authenticationManagerBean();
+  }
+
+  @Bean
+  CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(Arrays.asList("*"));
+    configuration.setAllowedMethods(Arrays.asList("*"));
+    configuration.setAllowedHeaders(Arrays.asList("*"));
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
   }
 }
