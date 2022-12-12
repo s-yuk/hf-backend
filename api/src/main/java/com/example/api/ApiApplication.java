@@ -25,9 +25,7 @@ public class ApiApplication {
 	CommandLineRunner run(ResouceService resouceService) {
 		return args -> {
 			resouceService.saveRole(new Role(null, "ROLE_USER"));
-			resouceService.saveRole(new Role(null, "ROLE_MANAGER"));
 			resouceService.saveRole(new Role(null, "ROLE_ADMIN"));
-			resouceService.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
 		};
 	}
 }
