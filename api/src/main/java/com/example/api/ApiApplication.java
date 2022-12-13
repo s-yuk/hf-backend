@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.example.api.auth.service.ResouceService;
+import com.example.api.auth.service.ResourceService;
 import com.example.api.model.Role;
 
 @SpringBootApplication
@@ -22,10 +22,10 @@ public class ApiApplication {
 	}
 
 	@Bean
-	CommandLineRunner run(ResouceService resouceService) {
+	CommandLineRunner run(ResourceService resourceService) {
 		return args -> {
-			resouceService.saveRole(new Role(null, "ROLE_USER"));
-			resouceService.saveRole(new Role(null, "ROLE_ADMIN"));
+			resourceService.saveRole(new Role(null, "ROLE_USER"));
+			resourceService.saveRole(new Role(null, "ROLE_ADMIN"));
 		};
 	}
 }
