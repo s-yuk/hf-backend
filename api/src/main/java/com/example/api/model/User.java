@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -44,13 +45,12 @@ public class User implements UserDetails {
   @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Collection<Role> roles = new ArrayList<>();
 
-  /**
-   * UserDetailsを実装するために必要な関数
-   * 触らなくていい
-   */
+  @Transient
+  private Collection<GrantedAuthority> authorities;
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return null;
+    return this.authorities;
   }
 
   @Override
