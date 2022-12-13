@@ -22,10 +22,10 @@ public class ApiApplication {
 	}
 
 	@Bean
-	CommandLineRunner run(ResouceService resouceService) {
+	CommandLineRunner run(ResourceService resourceService) {
 		return args -> {
-			resouceService.saveRole(new Role(null, "ROLE_USER"));
-			resouceService.saveRole(new Role(null, "ROLE_ADMIN"));
+			resourceService.saveRole(new Role(null, "ROLE_USER"));
+			resourceService.saveRole(new Role(null, "ROLE_ADMIN"));
 		};
 	}
 }

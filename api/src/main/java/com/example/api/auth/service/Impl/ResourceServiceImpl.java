@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class ResouceServiceImpl implements ResouceService {
+public class ResourceServiceImpl implements ResourceService {
   private final RoleRepo roleRepo;
 
   @Override
