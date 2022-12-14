@@ -40,8 +40,10 @@ public class User implements UserDetails {
   private String password;
   @Column(name = "have_points", columnDefinition = "int default '0'")
   private Integer have_points;
-  @Column(name = "grop_id",)
-  private Integer grop_id;
+  @Column(name = "have_stocks")
+  private Integer have_stocks;
+  // @Column(name = "grop_id")
+  // private Integer grop_id;
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
