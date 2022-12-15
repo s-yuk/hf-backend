@@ -1,16 +1,16 @@
-package com.example.api.service;
+// package com.example.api.service;
 
-import java.util.List;
-import java.util.Optional;
+// import java.util.List;
+// import java.util.Optional;
 
-import com.example.api.model.User;
+// import com.example.api.model.User;
 
-public interface UserService {
-  List<User> getUsers();
+// public interface UserService {
+//   List<User> getUsers();
 
-  Optional<User> getUserById(Long id);
+//   Optional<User> getUserById(Long id);
 
-  User saveUser(User user);
+//   User saveUser(User user);
 
-  User updateUserById(User user);
-}
+//   User updateUserById(User user);
+// }

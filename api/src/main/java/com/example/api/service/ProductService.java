@@ -1,11 +1,11 @@
-package com.example.api.service;
+// package com.example.api.service;
 
-import java.util.List;
+// import java.util.List;
 
-import com.example.api.model.Product;
+// import com.example.api.model.Product;
 
-public interface ProductService {
-  List<Product> getHaveProduct();
+// public interface ProductService {
+//   List<Product> getHaveProduct();
 
-  void saveProduct(Product product);
-}
+//   void saveProduct(Product product);
+// }

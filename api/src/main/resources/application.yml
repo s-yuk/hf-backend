@@ -2,7 +2,6 @@ server:
   error:
     include-message: always
     include-binding-errors: always
-
 spring:
   jpa:
     database: MYSQL
