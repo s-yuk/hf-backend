@@ -3,5 +3,11 @@
   "editor.formatOnSave": true,
   "files.trimTrailingWhitespace": true,
   "files.eol": "\n",
-  "java.compile.nullAnalysis.mode": "disabled"
+  "java.compile.nullAnalysis.mode": "disabled",
+  "files.exclude": {
+    "**/.devcontainer": true,
+    "**/.github": true,
+    "**/api/.gradle": true,
+    "**/api/bin": true,
+  },
 }

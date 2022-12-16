@@ -5,21 +5,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.example.api.model.CustomUserDetails;
-import com.example.api.model.entity.UserEntity;
 import com.example.api.repo.UserRepo;
 
 public class CustomUserDetailsService implements UserDetailsService {
   @Autowired
   UserRepo userRepo;
+  private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
 
   @Override
-  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    UserEntity userEntity = userRepo.findByEmail(email);
-    if (userEntity == null) {
-      throw new UsernameNotFoundException("No user found with the given email");
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+      return userRepo.findByEmail(email)
+        .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
     }
-    return new CustomUserDetails(userEntity);
-  }
-
 }
