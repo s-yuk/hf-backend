@@ -1,3 +1,4 @@
+package com.example.api.model.entity;
 // package com.example.api.model;
 
 // import javax.persistence.Column;

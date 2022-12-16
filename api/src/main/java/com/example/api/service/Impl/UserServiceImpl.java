@@ -1,42 +1,40 @@
 // package com.example.api.service.Impl;
 
-// import java.util.List;
-// import java.util.Optional;
-
 // import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.security.core.userdetails.UserDetails;
+// import org.springframework.security.core.userdetails.UserDetailsService;
+// import org.springframework.security.core.userdetails.UsernameNotFoundException;
+// import org.springframework.security.crypto.password.PasswordEncoder;
 // import org.springframework.stereotype.Service;
-// import org.springframework.transaction.annotation.Transactional;
 
-// import com.example.api.model.User;
+// import com.example.api.model.entity.UserEntity;
 // import com.example.api.repo.UserRepo;
 // import com.example.api.service.UserService;
 
-// import lombok.RequiredArgsConstructor;
+// import lombok.AllArgsConstructor;
 
 // @Service
-// @RequiredArgsConstructor
-// @Transactional
-// public class UserServiceImpl implements UserService {
+// @AllArgsConstructor
+// public class UserServiceImpl implements UserService, UserDetailsService {
+//   private final PasswordEncoder passwordEncoder;
 //   @Autowired
-//   private UserRepo _userRepo;
+//   UserRepo userRepo;
+//   private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
 
 //   @Override
-//   public List<User> getUsers() {
-//     return _userRepo.findAll();
+//   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//     return userRepo.findByEmail(email)
+//             .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
 //   }
 
 //   @Override
-//   public Optional<User> getUserById(Long id) {
-//     return _userRepo.findById(id);
-//   };
-
-//   @Override
-//   public User saveUser(User user) {
-//     return _userRepo.save(user);
-//   };
-
-//   @Override
-//   public User updateUserById(User user) {
-//     return _userRepo.save(user);
-//   };
+//   public String signUp(UserEntity user) {
+//     boolean userExists = userRepo.findByEmail(user.getEmail()).isPresent();
+//     if (userExists) {
+//       throw new IllegalStateException("email already taken");
+//     }
+//     user.setPassword(passwordEncoder.encode(user.getPassword()));
+//     userRepo.save(user);
+//     return "is work";
+//   }
 // }
