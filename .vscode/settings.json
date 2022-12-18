@@ -9,5 +9,10 @@
     "**/.github": true,
     "**/api/.gradle": true,
     "**/api/bin": true,
+    "**/api/gradle": true,
+    "**/api/.gitignore": true,
+    "**/api/settings.gradle": true,
+    "**/api/gradlew": true,
+    "**/api/gradlew.bat": true,
   },
 }
