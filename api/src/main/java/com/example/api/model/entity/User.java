@@ -42,10 +42,10 @@ public class User implements UserDetails {
   private String password;
 
   @Column(columnDefinition = "varchar(255) default '0'")
-  private String havePoint;
+  private String havePoint = "0";
 
   @Column(columnDefinition = "varchar(255) default '0'")
-  private String haveStock;
+  private String haveStock = "0";
 
   @Column(name = "groupId")
   private Integer groupId;

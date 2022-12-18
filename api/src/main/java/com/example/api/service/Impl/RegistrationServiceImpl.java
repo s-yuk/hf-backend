@@ -1,8 +1,8 @@
 package com.example.api.service.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.example.api.model.entity.User;
 import com.example.api.model.form.RegistrationForm;
@@ -19,14 +19,25 @@ public class RegistrationServiceImpl implements RegistrationService {
   @Autowired
   private UserRepo userRepo;
 
+  private final PasswordEncoder passwordEncoder;
+
   public String signUp(RegistrationForm form) {
     log.info("service {}", form);
+
     User user = new User();
     user.setName(form.getName());
     user.setEmail(form.getEmail());
     user.setPassword(form.getPassword());
 
-    userRepo.save(user);
+    log.info("email {}", user.getEmail());
+
+    boolean userExists = userRepo.findByEmail(user.getEmail()).isPresent();
+    if (userExists) {
+      throw new IllegalStateException("The email address you entered is already in use");
+    } else {
+      user.setPassword(passwordEncoder.encode(user.getPassword()));
+      userRepo.save(user);
+    }
     return "service is work";
   }
 }

@@ -22,7 +22,7 @@ public class RegistrationController {
 
   @PostMapping
   public String register (@RequestBody RegistrationForm form) {
-    log.info("form: {}", form);
+    log.info("controller: {}", form);
     rService.signUp(form);
     return "is work";
   }
