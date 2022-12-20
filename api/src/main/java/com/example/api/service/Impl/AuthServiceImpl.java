@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import com.example.api.model.entity.User;
 import com.example.api.model.form.RegistrationForm;
 import com.example.api.repo.UserRepo;
-import com.example.api.service.RegistrationService;
+import com.example.api.service.AuthService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,21 +15,17 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class RegistrationServiceImpl implements RegistrationService {
+public class AuthServiceImpl implements AuthService {
   @Autowired
   private UserRepo userRepo;
 
   private final PasswordEncoder passwordEncoder;
 
   public String signUp(RegistrationForm form) {
-    log.info("service {}", form);
-
     User user = new User();
     user.setName(form.getName());
     user.setEmail(form.getEmail());
     user.setPassword(form.getPassword());
-
-    log.info("email {}", user.getEmail());
 
     boolean userExists = userRepo.findByEmail(user.getEmail()).isPresent();
     if (userExists) {

@@ -7,23 +7,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.api.model.form.RegistrationForm;
-import com.example.api.service.RegistrationService;
+import com.example.api.service.AuthService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/api/v1/register")
+@RequestMapping("/api/v1")
 @AllArgsConstructor
 @Slf4j
-public class RegistrationController {
+public class AuthController {
   @Autowired
-  private RegistrationService rService;
+  private AuthService authService;
 
-  @PostMapping
+  @PostMapping("/register")
   public String register (@RequestBody RegistrationForm form) {
-    log.info("controller: {}", form);
-    rService.signUp(form);
+    authService.signUp(form);
     return "is work";
   }
 }
