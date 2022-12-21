@@ -1,4 +1,4 @@
-package com.example.api.filter;
+package com.example.api.config;
 
 import java.io.IOException;
 
