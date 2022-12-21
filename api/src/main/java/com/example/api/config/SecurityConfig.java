@@ -43,35 +43,35 @@ public class SecurityConfig {
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http
       .authorizeHttpRequests(authz -> authz
-        .mvcMatchers("/api/v1/register/**", "/api/v1/login").permitAll()
-        .anyRequest().authenticated()
-        )
-        .authenticationProvider(authenticationProvider())
-        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+        .mvcMatchers("/").permitAll());
+        // .anyRequest().authenticated()
+
+        // .authenticationProvider(authenticationProvider())
+        // .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
     http.cors();
 
     return http.build();
   }
 
-  @Bean
-  public AuthenticationProvider authenticationProvider() {
-    final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-    authenticationProvider.setUserDetailsService(userDetailsService());
-    authenticationProvider.setPasswordEncoder(passwordEncoder());
+  // @Bean
+  // public AuthenticationProvider authenticationProvider() {
+  //   final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+  //   authenticationProvider.setUserDetailsService(userDetailsService());
+  //   authenticationProvider.setPasswordEncoder(passwordEncoder());
 
-    return authenticationProvider();
-  }
+  //   return authenticationProvider();
+  // }
 
-  @Bean
-  public UserDetailsService userDetailsService() {
-    return new UserDetailsService() {
-      @Override
-      public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return
-          userRepo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
-      }
-    };
-  }
+  // @Bean
+  // public UserDetailsService userDetailsService() {
+  //   return new UserDetailsService() {
+  //     @Override
+  //     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+  //       return
+  //         userRepo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
+  //     }
+  //   };
+  // }
 
   @Bean
 	PasswordEncoder passwordEncoder() {
