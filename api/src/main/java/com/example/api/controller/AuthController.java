@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.api.model.form.RegistrationForm;
+import com.example.api.model.form.SignUpForm;
 import com.example.api.service.AuthService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api")
 @AllArgsConstructor
 @Slf4j
 public class AuthController {
@@ -21,8 +21,11 @@ public class AuthController {
   private AuthService authService;
 
   @PostMapping("/register")
-  public String register (@RequestBody RegistrationForm form) {
-    authService.signUp(form);
-    return "is work";
+  public String register (@RequestBody SignUpForm form) {
+    String id = authService.signUp(form);
+    return id;
   }
+
+  // login
+  // logout
 }
