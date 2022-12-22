@@ -21,6 +21,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.example.api.model.entity.User;
 import com.example.api.repo.UserRepo;
 
 import lombok.RequiredArgsConstructor;
@@ -46,6 +47,7 @@ public class SecurityConfig {
         .anyRequest().authenticated()
         )
         .authenticationProvider(authenticationProvider())
+        .addFilter(AuthenticationFilter)
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
     http.cors();
 
@@ -59,6 +61,11 @@ public class SecurityConfig {
     authenticationProvider.setPasswordEncoder(passwordEncoder());
 
     return authenticationProvider();
+  }
+
+  @Bean
+  public UserDetails userDetails() {
+    return new User();
   }
 
   @Bean
