@@ -8,7 +8,6 @@
 
 /service/Impl
 - serviceの実装
-- ロジックを書く
 
 /model/entity
 - テーブルになるクラス
