@@ -20,5 +20,16 @@ content-type: application/json
   "role": "PARENT"
 }
 
+### ユーザー更新
+PUT http://localhost:8080/api/user/id HTTP/1.1
+content-type: application/json
+
+{
+  "username": "username",
+  "email": "email",
+  "password": "password",
+  "newPassword": "newPassword"
+}
+
 ### ユーザー削除
-DELETE http://localhost:8080/api/user/eed60893-8077-476b-8653-6149893bfd8b HTTP/1.1
+DELETE http://localhost:8080/api/user/id HTTP/1.1
