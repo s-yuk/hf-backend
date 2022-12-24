@@ -3,9 +3,9 @@ POST http://localhost:8080/api/register HTTP/1.1
 content-type: application/json
 
 {
-  "username": "john",
-  "email": "john@gmail.com",
-  "password": "iamjohn",
+  "username": "child",
+  "email": "child@gmail.com",
+  "password": "iamchild",
   "role": "CHILD"
 }
 
@@ -14,22 +14,22 @@ POST http://localhost:8080/api/register HTTP/1.1
 content-type: application/json
 
 {
-  "username": "john mom",
-  "email": "john-mom@gmail.com",
-  "password": "iamjohn-mom",
+  "username": "mom",
+  "email": "mom@gmail.com",
+  "password": "iammom",
   "role": "PARENT"
 }
 
 ### ユーザー更新
-PUT http://localhost:8080/api/user/id HTTP/1.1
+PUT http://localhost:8080/api/user/9020a617-c9a2-4c94-862c-daddb8f6a219 HTTP/1.1
 content-type: application/json
 
 {
-  "username": "username",
-  "email": "email",
-  "password": "password",
-  "newPassword": "newPassword"
+  "username": "newChild",
+  "email": "newchild@gmail.com",
+  "password": "iamchld",
+  "newPassword": "newIamChild"
 }
 
 ### ユーザー削除
-DELETE http://localhost:8080/api/user/id HTTP/1.1
+DELETE http://localhost:8080/api/user/9020a617-c9a2-4c94-862c-daddb8f6a219 HTTP/1.1
