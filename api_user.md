@@ -1,15 +1,21 @@
 ## 新規登録
 ```
 POST http://localhost:8080/api/register
+
 {
-  username: "username",
-  email: "email",
-  password: "password",
-  role: "role" 1なら子ども 2なら親
+  "username": "john",
+  "email": "john@gmail.com",
+  "password": "iamjohn",
+  "role": "CHILD"
 }
 @return
-body id
-header access_token
+id, access_token
 ```
 
-## ユーザー情報変更
+## ユーザー退会
+```
+DELETE http://localhost:8080/api/user/id
+
+@return
+message
+```

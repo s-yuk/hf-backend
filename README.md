@@ -4,11 +4,11 @@
 - エンドポイントの設定
 
 /service
-- serviceクラスのinterfaceを作る
+- serviceクラスのinterface
 
 /service/Impl
 - serviceの実装
-  - ロジックを書く
+- ロジックを書く
 
 /model/entity
 - テーブルになるクラス
@@ -16,10 +16,12 @@
 /model/form
 - formに入力される値を設定するクラス
 
+/model/dto
+- 返却値になるクラス
+
 /repo
-- sqlを発行する
-  - ORM
+- データベースアクセス層
 
 /config
 - Spring Securityの設定
-- JWTの生成、デコード、フィルター
+- JWT

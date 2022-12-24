@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.api.model.dto.SignUpDto;
 import com.example.api.model.form.SignUpForm;
 import com.example.api.service.AuthService;
 
@@ -21,9 +22,10 @@ public class AuthController {
   private AuthService authService;
 
   @PostMapping("/register")
-  public String register (@RequestBody SignUpForm form) {
-    String id = authService.signUp(form);
-    return id;
+  public SignUpDto register (@RequestBody SignUpForm form) {
+    SignUpDto signUpDto = authService.signUp(form);
+
+    return signUpDto;
   }
 
   // login

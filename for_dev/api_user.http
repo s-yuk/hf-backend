@@ -1,0 +1,24 @@
+### 新規登録(子ども)
+POST http://localhost:8080/api/register HTTP/1.1
+content-type: application/json
+
+{
+  "username": "john",
+  "email": "john@gmail.com",
+  "password": "iamjohn",
+  "role": "CHILD"
+}
+
+### 新規登録(親)
+POST http://localhost:8080/api/register HTTP/1.1
+content-type: application/json
+
+{
+  "username": "john mom",
+  "email": "john-mom@gmail.com",
+  "password": "iamjohn-mom",
+  "role": "PARENT"
+}
+
+### ユーザー削除
+DELETE http://localhost:8080/api/user/eed60893-8077-476b-8653-6149893bfd8b HTTP/1.1
