@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.api.model.dto.HandleErrorDto;
+import com.example.api.model.dto.UserById;
 import com.example.api.model.entity.User;
 import com.example.api.model.form.UpdateUserForm;
 import com.example.api.repo.UserRepo;
@@ -24,6 +25,19 @@ public class UserServiceImpl implements UserService {
   private UserRepo userRepo;
 
   private final PasswordEncoder passwordEncoder;
+
+  @Override
+  public UserById getUserById(String id) {
+    User user = userRepo.findById(id).orElseThrow(() -> new EntityNotFoundException());
+    UserById userById = new UserById();
+    userById.setUsername(user.getUsername());
+    userById.setEmail(user.getEmail());
+    userById.setHavePoint(user.getHavePoint());
+    userById.setHaveStock(user.getHaveStock());
+    userById.setGroupId(user.getGroupId());
+    userById.setRole(user.getRole());
+    return userById;
+  }
 
   @Override
   public HandleErrorDto updateUserById(String id, UpdateUserForm form) {
@@ -64,5 +78,4 @@ public class UserServiceImpl implements UserService {
     handleErrorDto.setMessage("削除しました。");
     return handleErrorDto;
   }
-
 }
