@@ -1,5 +1,5 @@
 ### ポイント更新
-PUT http://localhost:8080/api/property/point/id HTTP/1.1
+PUT http://localhost:8080/api/property/point/0316769b-26b7-413f-8ae0-708fc97c1469 HTTP/1.1
 content-type: application/json
 
 {
@@ -7,7 +7,7 @@ content-type: application/json
 }
 
 ### 株購入
-PUT http://localhost:8080/api/property/point/id HTTP/1.1
+PUT http://localhost:8080/api/property/stock/0316769b-26b7-413f-8ae0-708fc97c1469 HTTP/1.1
 content-type: application/json
 
 {

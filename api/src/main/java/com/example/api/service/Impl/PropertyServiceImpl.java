@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.api.model.dto.HandleErrorDto;
 import com.example.api.model.entity.User;
+import com.example.api.model.form.BuyMyStockForm;
 import com.example.api.model.form.UpdateMyChildPointForm;
 import com.example.api.repo.UserRepo;
 import com.example.api.service.PropertyService;
@@ -34,4 +35,16 @@ public class PropertyServiceImpl implements PropertyService {
     return handleErrorDto;
   }
 
+  @Override
+  public HandleErrorDto buyMyStock(String id, BuyMyStockForm form) {
+    User user = userRepo.findById(id).orElseThrow(() -> new EntityNotFoundException());
+    user.setHavePoint(form.getHavePoint());
+    user.setHaveStock(form.getHaveStock());
+    userRepo.save(user);
+    HandleErrorDto handleErrorDto = new HandleErrorDto();
+
+    handleErrorDto.setId(id);
+    handleErrorDto.setMessage("株購入");
+    return handleErrorDto;
+  }
 }
