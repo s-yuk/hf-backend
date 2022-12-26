@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.api.model.dto.HandleErrorDto;
 import com.example.api.model.dto.UserById;
-import com.example.api.model.entity.User;
 import com.example.api.model.form.UpdateUserForm;
 import com.example.api.service.UserService;
 
@@ -20,6 +19,10 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController @RequestMapping("/api/user") @AllArgsConstructor @Slf4j
+
+// 一件検索
+// 更新
+// 削除
 public class UserController {
   @Autowired
   UserService userService;

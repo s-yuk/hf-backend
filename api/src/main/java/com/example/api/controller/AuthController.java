@@ -17,6 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api")
 @AllArgsConstructor
 @Slf4j
+
+// signup
+// login
+// logout
 public class AuthController {
   @Autowired
   private AuthService authService;
@@ -27,7 +31,4 @@ public class AuthController {
 
     return signUpDto;
   }
-
-  // login
-  // logout
 }
