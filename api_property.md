@@ -1,6 +1,14 @@
 ## ポイント更新
-POST http:localhost:8080/api/property/id
+PUT http://localhost:8080/api/property/point/id
 
 {
   havaPoint: "500"
+}
+
+## 株購入
+PUT http://localhost:8080/api/property/stock/id
+
+{
+  havaPoint: "500",
+  haveStock: "100"
 }
