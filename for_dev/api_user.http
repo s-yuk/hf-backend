@@ -20,6 +20,9 @@ content-type: application/json
   "role": "PARENT"
 }
 
+### ユーザー1人検索
+GET http://localhost:8080/api/user/fc37cf54-db75-4b9c-8f86-fdce693e3902 HTTP/1.1
+
 ### ユーザー更新
 PUT http://localhost:8080/api/user/9020a617-c9a2-4c94-862c-daddb8f6a219 HTTP/1.1
 content-type: application/json
