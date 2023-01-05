@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.api.config.JwtUtils;
 import com.example.api.model.Role;
-import com.example.api.model.dto.SignUpDto;
 import com.example.api.model.entity.User;
+import com.example.api.model.form.LoginForm;
 import com.example.api.model.form.SignUpForm;
 import com.example.api.repo.UserRepo;
 import com.example.api.service.AuthService;
@@ -24,11 +25,15 @@ public class AuthServiceImpl implements AuthService {
   private UserRepo userRepo;
   private final PasswordEncoder passwordEncoder;
 
-  public SignUpDto signUp(SignUpForm form) {
-
-    SignUpDto signUpDto = new SignUpDto();
+  public String signUp(SignUpForm form) {
 
     User user = new User();
+
+    User userExists = userRepo.findByEmail(form.getEmail());
+    if (userExists != null) {
+      throw new IllegalStateException("The email address you entered is already in use");
+    }
+
     user.setId(UUID.randomUUID().toString());
     user.setUsername(form.getUsername());
     user.setEmail(form.getEmail());
@@ -42,19 +47,35 @@ public class AuthServiceImpl implements AuthService {
         break;
       case "PARENT":
         user.setRole(Role.PARENT);
+        user.setGroupId(user.getId());
         break;
     }
-    boolean userExists = userRepo.findByEmail(user.getEmail()).isPresent();
-    if (userExists) {
-      throw new IllegalStateException("The email address you entered is already in use");
-    }
+
     userRepo.save(user);
 
-    // TODO 実装する
-    String token = "token";
+    // generate token
+    JwtUtils jwtUtils = new JwtUtils();
+    String token = jwtUtils.generateJwtToken(user.getId());
 
-    signUpDto.setId(user.getId());
-    signUpDto.setToken(token);
-    return signUpDto;
+    return token;
+  }
+
+  @Override
+  public String login(LoginForm form) {
+    User user = userRepo.findByEmail(form.getEmail());
+    String token = "";
+    if(user != null) {
+      boolean isMatchedPassword = isPasswordValid(form.getPassword(), user.getPassword());
+      if (isMatchedPassword) {
+        JwtUtils jwtUtils = new JwtUtils();
+        token = jwtUtils.generateJwtToken(user.getId());
+      }
+    }
+
+    return token;
+  }
+
+  public boolean isPasswordValid(String plainPassword, String encodedPassword) {
+    return passwordEncoder.matches(plainPassword, encodedPassword);
   }
 }
