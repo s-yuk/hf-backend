@@ -8,7 +8,6 @@
 
 /service/Impl
 - serviceの実装
-- ロジックを書く
 
 /model/entity
 - テーブルになるクラス
@@ -25,3 +24,11 @@
 /config
 - Spring Securityの設定
 - JWT
+
+---
+
+/for_dev
+- rest client apiテスト用
+
+/api_xxx.md
+- apiドキュメント

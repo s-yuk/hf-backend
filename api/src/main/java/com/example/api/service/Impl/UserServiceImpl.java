@@ -1,8 +1,15 @@
 package com.example.api.service.Impl;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.api.model.dto.HandleErrorDto;
+import com.example.api.model.dto.UserById;
+import com.example.api.model.entity.User;
+import com.example.api.model.form.UpdateUserForm;
 import com.example.api.repo.UserRepo;
 import com.example.api.service.UserService;
 
@@ -17,10 +24,58 @@ public class UserServiceImpl implements UserService {
   @Autowired
   private UserRepo userRepo;
 
+  private final PasswordEncoder passwordEncoder;
+
   @Override
-  public String deleteUserById(String id) {
-    userRepo.deleteById(id);
-    return id;
+  public UserById getUserById(String id) {
+    User user = userRepo.findById(id).orElseThrow(() -> new EntityNotFoundException());
+    UserById userById = new UserById();
+    userById.setUsername(user.getUsername());
+    userById.setEmail(user.getEmail());
+    userById.setHavePoint(user.getHavePoint());
+    userById.setHaveStock(user.getHaveStock());
+    userById.setGroupId(user.getGroupId());
+    userById.setRole(user.getRole());
+    return userById;
   }
 
+  @Override
+  public HandleErrorDto updateUserById(String id, UpdateUserForm form) {
+
+    HandleErrorDto handleErrorDto = new HandleErrorDto();
+    handleErrorDto.setId(id);
+
+    User user = userRepo.findById(id).orElseThrow(() -> new EntityNotFoundException());
+
+    boolean isMatchedPassword = isPasswordValid(form.getPassword(), user.getPassword());
+
+    if (isMatchedPassword) {
+      user.setUsername(form.getUsername());
+      user.setEmail(form.getEmail());
+      user.setPassword(passwordEncoder.encode(form.getNewPassword()));
+
+      handleErrorDto.setMessage("更新しました。");
+      userRepo.save(user);
+    } else {
+      handleErrorDto.setMessage("パスワードが間違っています。");
+    }
+
+    return handleErrorDto;
+  }
+
+  // パスワードの正誤判定
+  public boolean isPasswordValid(String plainPassword, String encodedPassword) {
+    return passwordEncoder.matches(plainPassword, encodedPassword);
+  }
+
+  @Override
+  public HandleErrorDto deleteUserById(String id) {
+    HandleErrorDto handleErrorDto = new HandleErrorDto();
+
+    userRepo.deleteById(id);
+
+    handleErrorDto.setId(id);
+    handleErrorDto.setMessage("削除しました。");
+    return handleErrorDto;
+  }
 }
