@@ -14,6 +14,6 @@ public class UserById {
   private String email;
   private String havePoint;
   private String haveStock;
-  private Integer groupId;
+  private String groupId;
   private Role role;
 }

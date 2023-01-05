@@ -1,12 +1,18 @@
 package com.example.api.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.api.model.dto.SignUpDto;
+import com.example.api.model.form.LoginForm;
 import com.example.api.model.form.SignUpForm;
 import com.example.api.service.AuthService;
 
@@ -18,17 +24,44 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Slf4j
 
-// signup
-// login
-// logout
 public class AuthController {
   @Autowired
   private AuthService authService;
 
   @PostMapping("/register")
-  public SignUpDto register (@RequestBody SignUpForm form) {
-    SignUpDto signUpDto = authService.signUp(form);
+  public ResponseEntity<?> register(@RequestBody SignUpForm form, HttpServletResponse response) {
+    String token = authService.signUp(form);
+    if (token.isEmpty()) {
+      throw new IllegalArgumentException();
+    }
+    Cookie cookie = new Cookie("token", token);
+    cookie.setMaxAge(365 * 24 * 60 * 60);
+    response.addCookie(cookie);
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
 
-    return signUpDto;
+  @PostMapping("/login")
+  public ResponseEntity<?> login(@RequestBody LoginForm form, HttpServletResponse response) {
+    String token = authService.login(form);
+    if (token.isEmpty()) {
+      throw new IllegalArgumentException();
+    }
+    Cookie cookie = new Cookie("token", token);
+    cookie.setMaxAge(365 * 24 * 60 * 60);
+    response.addCookie(cookie);
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+  @PostMapping("/logout")
+  public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
+    Cookie[] cookies = request.getCookies();
+    for (Cookie cookie : cookies) {
+      if ("token".equals(cookie.getName())) {
+        cookie.setValue(null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+      }
+    }
+    return new ResponseEntity<>(HttpStatus.OK);
   }
 }

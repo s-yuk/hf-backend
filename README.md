@@ -1,34 +1,13 @@
-## ディレクトリの責務
+# hf-backend
 
-/controller
-- エンドポイントの設定
+## 技術
+- Java
+- Spring Boot
+- Gradle
+- MySQL
+- Docker / Docker Compose
 
-/service
-- serviceクラスのinterface
+## 説明
+Spring Boot で REST API 作成
 
-/service/Impl
-- serviceの実装
-
-/model/entity
-- テーブルになるクラス
-
-/model/form
-- formに入力される値を設定するクラス
-
-/model/dto
-- 返却値になるクラス
-
-/repo
-- データベースアクセス層
-
-/config
-- Spring Securityの設定
-- JWT
-
----
-
-/for_dev
-- rest client apiテスト用
-
-/api_xxx.md
-- apiドキュメント
+認証・認可は JWT を使った Bearer 認証

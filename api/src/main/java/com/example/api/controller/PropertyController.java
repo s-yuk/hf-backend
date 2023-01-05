@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.api.model.dto.HandleErrorDto;
+import com.example.api.model.form.BuyMyStockForm;
 import com.example.api.model.form.UpdateMyChildPointForm;
 import com.example.api.service.PropertyService;
 
@@ -18,6 +19,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/property")
 @AllArgsConstructor
 @Slf4j
+
+// ポイント更新
+// 株購入
 public class PropertyController {
 
   @Autowired
@@ -27,6 +31,13 @@ public class PropertyController {
   public HandleErrorDto updateMyChildPoint(@PathVariable String id, @RequestBody UpdateMyChildPointForm form) {
     log.info("form:{}", form);
     HandleErrorDto dto = propertyService.updateMyChildPoint(id, form);
+    return dto;
+  }
+
+  @PutMapping("/stock/{id}")
+  public HandleErrorDto buyMyStock(@PathVariable String id, @RequestBody BuyMyStockForm form) {
+    log.info("form:{}", form);
+    HandleErrorDto dto = propertyService.buyMyStock(id, form);
     return dto;
   }
 }

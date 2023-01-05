@@ -37,7 +37,7 @@ public class User {
   private String haveStock = "0";
 
   @Column(name = "groupId")
-  private Integer groupId;
+  private String groupId;
 
   @Enumerated(EnumType.STRING)
   private Role role;

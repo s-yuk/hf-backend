@@ -1,7 +1,0 @@
-### ポイント更新
-PUT http://localhost:8080/api/property/point/4a3286dd-1b79-442c-a3e1-73c00483d3ab HTTP/1.1
-content-type: application/json
-
-{
-  "havePoint": "500"
-}
