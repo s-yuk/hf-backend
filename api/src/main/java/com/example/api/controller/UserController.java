@@ -36,7 +36,7 @@ public class UserController {
   @Autowired
   UserService userService;
 
-  @GetMapping()
+  @GetMapping("/all")
   public ResponseEntity<List<User>> userGet() {
     List<User> users = userService.userList();
     return ResponseEntity.ok(users);
