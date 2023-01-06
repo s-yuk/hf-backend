@@ -1,10 +1,10 @@
-package com.example.api.service;
+// package com.example.api.service;
 
-import com.example.api.model.dto.HandleErrorDto;
-import com.example.api.model.form.BuyMyStockForm;
-import com.example.api.model.form.UpdateMyChildPointForm;
+// import com.example.api.model.dto.HandleErrorDto;
+// import com.example.api.model.form.BuyMyStockForm;
+// import com.example.api.model.form.UpdateMyChildPointForm;
 
-public interface PropertyService {
-  HandleErrorDto buyMyStock(String id, BuyMyStockForm form);
-  HandleErrorDto updateMyChildPoint(String id, UpdateMyChildPointForm form);
-}
+// public interface PropertyService {
+//   HandleErrorDto buyMyStock(String id, BuyMyStockForm form);
+//   HandleErrorDto updateMyChildPoint(String id, UpdateMyChildPointForm form);
+// }

@@ -24,6 +24,9 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Slf4j
 
+// 新規登録
+// ログイン
+// ログアウト
 public class AuthController {
   @Autowired
   private AuthService authService;
@@ -34,10 +37,7 @@ public class AuthController {
     if (token.isEmpty()) {
       throw new IllegalArgumentException();
     }
-    Cookie cookie = new Cookie("token", token);
-    cookie.setMaxAge(365 * 24 * 60 * 60);
-    response.addCookie(cookie);
-    return new ResponseEntity<>(HttpStatus.OK);
+    return ResponseEntity.ok(token);
   }
 
   @PostMapping("/login")

@@ -1,13 +1,23 @@
 package com.example.api.service;
 
-import com.example.api.model.dto.HandleErrorDto;
-import com.example.api.model.dto.UserById;
-import com.example.api.model.form.UpdateUserForm;
+import java.util.List;
 
+import com.example.api.model.dto.LoginUser;
+import com.example.api.model.entity.User;
+import com.example.api.model.form.UpdateLoginUserForm;
+
+// ログインユーザー取得
+// ログインユーザー更新
+// ログインユーザー削除
+// ポイント追加
 public interface UserService {
-  UserById getUserById(String id);
+  LoginUser getLoginUser(String token);
 
-  HandleErrorDto updateUserById(String id, UpdateUserForm form);
+  void updateLoginUser(String token, UpdateLoginUserForm form);
 
-  HandleErrorDto deleteUserById(String id);
+  void deleteLoginUser(String token);
+
+  void addChildPoint(String havePoint, String id);
+
+  List<User> userList();
 }

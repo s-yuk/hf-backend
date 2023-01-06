@@ -53,7 +53,6 @@ public class AuthServiceImpl implements AuthService {
 
     userRepo.save(user);
 
-    // generate token
     JwtUtils jwtUtils = new JwtUtils();
     String token = jwtUtils.generateJwtToken(user.getId());
 
