@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.api.model.dto.LoginDto;
 import com.example.api.model.form.LoginForm;
 import com.example.api.model.form.SignUpForm;
 import com.example.api.service.AuthService;
@@ -42,14 +43,13 @@ public class AuthController {
 
   @PostMapping("/login")
   public ResponseEntity<?> login(@RequestBody LoginForm form, HttpServletResponse response) {
-    String token = authService.login(form);
-    if (token.isEmpty()) {
+    LoginDto loginDto = new LoginDto();
+    loginDto = authService.login(form);
+    log.info("token", loginDto.getToken());
+    if (loginDto.getToken().isEmpty()) {
       throw new IllegalArgumentException();
     }
-    Cookie cookie = new Cookie("token", token);
-    cookie.setMaxAge(365 * 24 * 60 * 60);
-    response.addCookie(cookie);
-    return new ResponseEntity<>(HttpStatus.OK);
+    return ResponseEntity.ok(loginDto);
   }
 
   @PostMapping("/logout")

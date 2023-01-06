@@ -9,9 +9,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.api.config.JwtUtils;
-import com.example.api.model.dto.HandleErrorDto;
+import com.example.api.model.Role;
 import com.example.api.model.dto.LoginUser;
 import com.example.api.model.entity.User;
+import com.example.api.model.form.Email;
 import com.example.api.model.form.UpdateLoginUserForm;
 import com.example.api.repo.UserRepo;
 import com.example.api.service.UserService;
@@ -51,6 +52,25 @@ public class UserServiceImpl implements UserService {
     loginUser.setGroupId(user.getGroupId());
     loginUser.setRole(user.getRole());
     return loginUser;
+  }
+
+  @Override
+  public List<User> getGroupUser(String token) {
+    JwtUtils jwtUtils = new JwtUtils();
+    String _id = jwtUtils.decodeJwtToken(token);
+    List<User> user = userRepo.findAllByGroupIdAndRole(_id, Role.CHILD)
+        .orElseThrow(() -> new EntityNotFoundException());
+
+    return user;
+  }
+
+  @Override
+  public void addGroup(String token, Email email) {
+    JwtUtils jwtUtils = new JwtUtils();
+    String _id = jwtUtils.decodeJwtToken(token);
+    User user = userRepo.findByEmail(email.getEmail());
+    user.setGroupId(_id);
+    userRepo.save(user);
   }
 
   @Override

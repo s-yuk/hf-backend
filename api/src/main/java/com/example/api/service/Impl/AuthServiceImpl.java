@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.api.config.JwtUtils;
 import com.example.api.model.Role;
+import com.example.api.model.dto.LoginDto;
 import com.example.api.model.entity.User;
 import com.example.api.model.form.LoginForm;
 import com.example.api.model.form.SignUpForm;
@@ -60,18 +61,22 @@ public class AuthServiceImpl implements AuthService {
   }
 
   @Override
-  public String login(LoginForm form) {
+  public LoginDto login(LoginForm form) {
+    LoginDto loginDto = new LoginDto();
     User user = userRepo.findByEmail(form.getEmail());
     String token = "";
-    if(user != null) {
+    if (user != null) {
       boolean isMatchedPassword = isPasswordValid(form.getPassword(), user.getPassword());
       if (isMatchedPassword) {
         JwtUtils jwtUtils = new JwtUtils();
         token = jwtUtils.generateJwtToken(user.getId());
+        Role role = user.getRole();
+        loginDto.setToken(token);
+        loginDto.setRole(role);
       }
     }
 
-    return token;
+    return loginDto;
   }
 
   public boolean isPasswordValid(String plainPassword, String encodedPassword) {
