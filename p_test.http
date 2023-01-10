@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:8080/api/product
-@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmYTZmMGE1NC00ZmFjLTRkM2EtYTAwYi1mNGQzMjBlZDQ3OTYiLCJleHAiOjE2NzMzNjUyMzJ9.cdi4gnplxjXb5vMPPZDdb1xIkxSclsVzCBfNAVgLxyM
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIyYWEzZDY4Yi1jZDQyLTRjMDgtOTFmNi1kMzYwZDRjZjEyODkiLCJleHAiOjE2NzMzNzI3NTF9.eA7tFjBbC2o_g0loP7g5E1YmWNG3ss6PKGxAFLYvOlg
 
 ### 商品表示
 GET {{baseUrl}} HTTP/1.1
@@ -13,4 +13,13 @@ Authorization: {{token}}
 {
   "name": "syohin2",
   "usePoint": "200"
+}
+
+###　商品更新
+PUT {{baseUrl}}/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "syouhin99",
+  "usePoint": "999"
 }
