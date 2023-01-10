@@ -9,5 +9,5 @@ import com.example.api.model.entity.Product;
 
 @Repository
 public interface ProductRepo extends JpaRepository<Product, Long> {
-  List<Product> findByUsersId(String is);
+  List<Product> findByUserId(String id);
 }

@@ -1,0 +1,16 @@
+@baseUrl = http://localhost:8080/api/product
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmYTZmMGE1NC00ZmFjLTRkM2EtYTAwYi1mNGQzMjBlZDQ3OTYiLCJleHAiOjE2NzMzNjUyMzJ9.cdi4gnplxjXb5vMPPZDdb1xIkxSclsVzCBfNAVgLxyM
+
+### 商品表示
+GET {{baseUrl}} HTTP/1.1
+Authorization: {{token}}
+
+### 商品追加
+POST {{baseUrl}} HTTP/1.1
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "syohin2",
+  "usePoint": "200"
+}

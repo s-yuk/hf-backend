@@ -1,5 +1,6 @@
 package com.example.api.controller;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,22 +38,31 @@ public class ProductController {
   @Autowired
   UserRepo userRepo;
 
+  // 500エラー
+  // 多分関数の型をdtoフォルダに定義してそれに値をセットしてけばできる気がする
   @GetMapping("")
   public ResponseEntity<List<Product>> getProducts(HttpServletRequest request) {
     String token = request.getHeader(AUTHORIZATION);
     JwtUtils jwtUtils = new JwtUtils();
     String id = jwtUtils.decodeJwtToken(token);
-    List<Product> products = productRepo.findByUsersId(id);
+    List<Product> products = productRepo.findByUserId(id);
+    log.info("products{}", products);
     return ResponseEntity.ok(products);
   }
 
   @PostMapping("")
-  public ResponseEntity<?> addProduct(HttpServletRequest request, @RequestBody Product form) {
+  public ResponseEntity<?> addProduct(HttpServletRequest request, @RequestBody ProductForm form) {
     String token = request.getHeader(AUTHORIZATION);
     JwtUtils jwtUtils = new JwtUtils();
     String id = jwtUtils.decodeJwtToken(token);
+    User user = userRepo.findById(id).orElseThrow(() -> new EntityNotFoundException());
 
-    productRepo.save(form);
+    Product product = new Product();
+    product.setName(form.getName());
+    product.setUsePoint(form.getUsePoint());
+    product.setUser(user);
+
+    productRepo.save(product);
 
     return new ResponseEntity<>(HttpStatus.OK);
   }

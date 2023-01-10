@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -27,6 +28,6 @@ public class Product {
   private String name;
   private String usePoint;
 
-  @ManyToMany(fetch = FetchType.LAZY)
-  private List<User> users;
+  @ManyToOne(fetch = FetchType.LAZY)
+  private User user;
 }

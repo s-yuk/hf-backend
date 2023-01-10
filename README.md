@@ -1,5 +1,3 @@
-# hf-backend
-
 ## 技術
 - Java
 - Spring Boot

@@ -108,7 +108,6 @@ public class UserController {
     String token = request.getHeader(AUTHORIZATION);
     JwtUtils jwtUtils = new JwtUtils();
     String id = jwtUtils.decodeJwtToken(token);
-    log.info("test: {}", id);
     User user = userRepo.findById(id).orElseThrow(() -> new EntityNotFoundException());
     user.setHavePoint(form.getHavePoint());
     user.setHaveStock(form.getHaveStock());
