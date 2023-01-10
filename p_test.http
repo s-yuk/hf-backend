@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:8080/api/product
-@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIyYWEzZDY4Yi1jZDQyLTRjMDgtOTFmNi1kMzYwZDRjZjEyODkiLCJleHAiOjE2NzMzNzI3NTF9.eA7tFjBbC2o_g0loP7g5E1YmWNG3ss6PKGxAFLYvOlg
+@token = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJmMDRkODZjYy1jNmRmLTRhN2QtOTUyYS1lODYxYWNlY2UyYWUiLCJleHAiOjE2NzMzNzUwMjh9.CBuJ8iLUixhFOhJF9xQ9b6db57lxZq9VjiN55lIOCwA
 
 ### 商品表示
 GET {{baseUrl}} HTTP/1.1
