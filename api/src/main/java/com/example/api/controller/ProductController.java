@@ -73,7 +73,6 @@ public class ProductController {
   }
 
   // 商品名と必要ポイントの更新
-  //
   @PutMapping("/{id}")
   public ResponseEntity<?> updateProduct(@RequestBody UpdateProductForm form, @PathVariable Long id) {
     Product product = productRepo.findById(id).orElseThrow(() -> new EntityNotFoundException());
