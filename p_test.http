@@ -14,3 +14,15 @@ Authorization: {{token}}
   "name": "syohin2",
   "usePoint": "200"
 }
+
+###　商品更新
+PUT {{baseUrl}}/1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "syouhin99",
+  "usePoint": "999"
+}
+
+### 商品削除
+DELETE {{baseUrl}}/2 HTTP/1.1
