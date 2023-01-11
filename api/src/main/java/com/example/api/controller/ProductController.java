@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.api.config.JwtUtils;
+import com.example.api.model.dto.ProductDto;
 import com.example.api.model.entity.Product;
 import com.example.api.model.entity.User;
 import com.example.api.model.form.ProductForm;
@@ -45,8 +46,8 @@ public class ProductController {
     String token = request.getHeader(AUTHORIZATION);
     JwtUtils jwtUtils = new JwtUtils();
     String id = jwtUtils.decodeJwtToken(token);
-    List<Product> products = productRepo.findByUserId(id);
-    log.info("products{}", products);
+
+    List<Product> products = productRepo.findAllByUserId(id).forEach({});
     return ResponseEntity.ok(products);
   }
 
